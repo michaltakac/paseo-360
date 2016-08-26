@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="description" content="Hello, World! - A-Frame">
+    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v2.3.0/dist/aframe-extras.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-look-at-component/master/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://rawgit.com/bryik/aframe-bmfont-text-component/master/dist/aframe-bmfont-text-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+      <a-assets>
+        <img id="snimka_01" src="img/snimka_01.jpg">
+        <img id="snimka_02" src="img/snimka_02.jpg">
+        <img id="snimka_03" src="img/snimka_03.jpg">
+        <img id="snimka_04" src="img/snimka_04.jpg">
+        <img id="door-icon" src="img/door-icon.svg">
+        <img id="redirect" src="img/redirect.png">
+      </a-assets>
+      
+      <!-- CURSOR -->
+      <a-entity position="0 1.8 5">
+        <a-entity
+            id="camera"
+            camera="far: 10000; fov: 80; near: 0.5;"
+            look-controls="enabled: true"
+            rotation="0 0 0"
+            universal-controls="movementControls: false;"
+            custom-controls>
+
+            <!-- MAIN CURSOR -->
+            <a-entity
+                cursor="fuse: true; maxDistance: 500; timeout: 3000;"
+                id="cursor-main"
+                position="0 0 -2"
+                geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.04;"
+                material="color: #439DC2; shader: flat;"
+                >
+            </a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-entity id="scene1" visible="true">
+        <a-image onclick="showScene2()" position="6 2.9 -8" look-at="#camera" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
+          <a-event name="mouseenter" target="#redirect-text-1" opacity="1"></a-event>
+          <a-event name="mouseleave" target="#redirect-text-1" opacity="0"></a-event>
+        </a-image>
+        <a-image
+          id="redirect-text-1"
+          src="#redirect"
+          width="9.8"
+          height="0.57"
+          position="6 1.1 -5"
+          opacity="0"
+          look-at="#camera"
+        >
+        </a-image>
+        <a-sky id="sky-01" src="#snimka_01"></a-sky>
+      </a-entity>
+
+      <a-entity id="scene2" visible="false">
+        <a-image onclick="toIndex()" look-at="#camera" position="6 2.9 8" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
+          <a-event name="mouseenter" target="#redirect-text-2" opacity="1"></a-event>
+          <a-event name="mouseleave" target="#redirect-text-2" opacity="0"></a-event>
+        </a-image>
+        <a-image
+          id="redirect-text-2"
+          src="#redirect"
+          width="9.8"
+          height="0.57"
+          position="6 1.1 -5"
+          opacity="0"
+          look-at="#camera"
+        >
+        </a-image>
+        <a-sky id="sky-02" src="#snimka_02"></a-sky>
+      </a-entity>
+      <a-entity id="scene3" visible="false">
+        <a-sky id="sky-03" src="#snimka_03"></a-sky>
+      </a-entity>
+      <a-entity id="scene4" visible="false">
+        <a-sky id="sky-04" src="#snimka_04"></a-sky>
+      </a-entity>
+    </a-scene>
+    <script>
+      // Turn on landing page
+      function toIndex() {
+        document.querySelector('#scene1').setAttribute('visible', true);
+        document.querySelector('#scene2').setAttribute('visible', false);
+        document.querySelector('#scene3').setAttribute('visible', false);
+        document.querySelector('#scene4').setAttribute('visible', false);
+      }
+      // Turn on scene2
+      function showScene2() {
+        document.querySelector('#scene1').setAttribute('visible', false);
+        document.querySelector('#scene2').setAttribute('visible', true);
+        document.querySelector('#scene3').setAttribute('visible', false);
+        document.querySelector('#scene4').setAttribute('visible', false);
+        document.querySelector('#camera').setAttribute('rotation', '0 0 0');
+      };
+      // Turn on scene3
+      function showScene3() {
+        document.querySelector('#scene1').setAttribute('visible', false);
+        document.querySelector('#scene2').setAttribute('visible', false);
+        document.querySelector('#scene3').setAttribute('visible', true);
+        document.querySelector('#scene4').setAttribute('visible', false);
+      };
+      // Turn on scene3
+      function showScene4() {
+        document.querySelector('#scene1').setAttribute('visible', false);
+        document.querySelector('#scene2').setAttribute('visible', false);
+        document.querySelector('#scene3').setAttribute('visible', false);
+        document.querySelector('#scene4').setAttribute('visible', true);
+      };
+      // Turn on scene3-(program)
+      function newSceneProgram() {
+        document.querySelector('#photosphere-menu').setAttribute('visible', false);
+        document.querySelector('#cursor-main').setAttribute('visible', true);
+        document.querySelector('#photosphere').setAttribute('visible', false);
+        document.querySelector('#scene2').setAttribute('visible', false);
+        document.querySelector('#scene3').setAttribute('visible', true);
+        document.querySelector('#landing').setAttribute('visible', false);
+      };
+      // Close menu event
+      function closeMenu() {
+        document.querySelector('#photosphere-menu').setAttribute('visible', false);
+        document.querySelector('#cursor-main').setAttribute('visible', true);
+      };
+      // document.querySelector('#github').addEventListener('click', function () {
+      //   window.location = "https://github.com/DimensionLab";
+      // });
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-82205701-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>
