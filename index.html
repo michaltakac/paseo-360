@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
-    <meta name="description" content="Hello, World! - A-Frame">
+    <title>Paseo Grunty 360 webVR Experience</title>
+    <meta name="description" content="Paseo Grunty 360 webVR Experience">
     <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v2.3.0/dist/aframe-extras.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-look-at-component/master/dist/aframe-look-at-component.min.js"></script>
@@ -43,7 +43,7 @@
       </a-entity>
 
       <a-entity id="scene1" visible="true">
-        <a-image onclick="showScene2()" position="6 2.9 -8" look-at="#camera" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
+        <a-image onclick="showScene2()" position="6.00 2.90 -8.00" look-at="#camera" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
           <a-event name="mouseenter" target="#redirect-text-1" opacity="1"></a-event>
           <a-event name="mouseleave" target="#redirect-text-1" opacity="0"></a-event>
         </a-image>
@@ -52,7 +52,7 @@
           src="#redirect"
           width="9.8"
           height="0.57"
-          position="6 1.1 -5"
+          position="5.70 1.10 -8.24"
           opacity="0"
           look-at="#camera"
         >
@@ -61,7 +61,7 @@
       </a-entity>
 
       <a-entity id="scene2" visible="false">
-        <a-image onclick="toIndex()" look-at="#camera" position="6 2.9 8" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
+        <a-image onclick="toIndex()" look-at="#camera" position="-6.10 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
           <a-event name="mouseenter" target="#redirect-text-2" opacity="1"></a-event>
           <a-event name="mouseleave" target="#redirect-text-2" opacity="0"></a-event>
         </a-image>
@@ -70,7 +70,7 @@
           src="#redirect"
           width="9.8"
           height="0.57"
-          position="6 1.1 -5"
+          position="-7.00 -2.43 17.13"
           opacity="0"
           look-at="#camera"
         >
