@@ -1,6 +1,6 @@
-title: "Hello World"
-repo: "aframevr/boilerplate"
-description: "Assorted primitives using basic HTML. Press `<ctrl> + <space` in the editor to see a list of available elements.<br><br>Primitives are preconfigured elements that wrap the underlying entity-component system."
+title: "Paseo Grunty 360 webVR Experience"
+repo: "michaltakac/paseo-360"
+description: "Paseo Grunty 360 webVR Experienc."
 mobile: true
 components:
 assets:
