@@ -17,7 +17,9 @@
         <img id="snimka_03" src="img/snimka_03.jpg">
         <img id="snimka_04" src="img/snimka_04.jpg">
         <img id="door-icon" src="img/open_door.png">
-        <img id="redirect" src="img/redirect.png">
+        <img id="question-icon" src="img/question-icon.png">
+        <img id="info" src="img/info.png">
+        <img id="close-x" src="img/x_button.png" alt="">
       </a-assets>
       
       <!-- CURSOR -->
@@ -37,6 +39,7 @@
                 position="0 0 -2"
                 geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.03; thetaLength: 360; thetaStart: 90;"
                 material="color: #439DC2; shader: flat;"
+                raycaster="objects: .collidable"
                 >
                 <a-animation begin="cursor-fusing" easing="ease-in" attribute="geometry.thetaLength" fill="forwards" from="360" to="0"></a-animation>
                 <a-animation begin="mouseleave" attribute="geometry.thetaLength" fill="backwards" from="0" to="360" dur="0"></a-animation>
@@ -53,27 +56,35 @@
   
       <!-- living room -->
       <a-entity id="scene1" visible="true">
-        <a-image onclick="showScene2()" id="change-scene" position="6.00 2.90 -8.00" look-at="#camera" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
-        <a-image onclick="showScene4()" id="change-scene" look-at="#camera" position="12 2.90 13" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image class="collidable" onclick="showScene2()" position="6.00 2.90 -8.00" look-at="#camera" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image class="collidable" onclick="showScene4()" look-at="#camera" position="12 2.90 13" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image onclick="showInfo()" id="info-icon" look-at="#camera" position="-5 -1.24 5.34" src="#question-icon" scale="0.8 0.8 0.8" material="side:double;color:#FFF;shader:flat;transparent:true;src:#question-icon" geometry="primitive:plane"></a-image>
+        <a-entity id="info-board" visible="false">
+            <a-image look-at="#camera" position="-3.72 0.57 2.53" src="#info" scale="4.5 4.5 4.5" material="side:double;color:#FFF;shader:flat;transparent:true;src:#info" geometry="primitive:plane"></a-image>
+            <a-image onclick="hideInfo()" src="#close-x" position="-3.00 2.37 1.01" width="0.4" height="0.4" look-at="#camera">
+                <a-animation begin="mouseenter" attribute="material.opacity" begin="fade" to="0.8" dur="500"></a-animation>
+            </a-image>
+            <a-animation begin="show-info" easing="ease-in" attribute="visible" fill="forwards" from="false" to="true"></a-animation>
+        </a-entity>
         <a-sky id="sky-01" src="#snimka_01"></a-sky>
       </a-entity>
       
       <!-- kitchen -->
       <a-entity id="scene2" visible="false">
-        <a-image onclick="toIndex()" id="change-scene" look-at="#camera" position="-6.10 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image onclick="toIndex()" look-at="#camera" position="-6.10 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
         <a-sky id="sky-02" src="#snimka_02"></a-sky>
       </a-entity>
       
       <!-- bedroom -->
       <a-entity id="scene3" visible="false">
-        <a-image onclick="showScene4()" id="change-scene" look-at="#camera" position="-6.70 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image onclick="showScene4()" look-at="#camera" position="-6.70 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
         <a-sky id="sky-03" src="#snimka_03"></a-sky>
       </a-entity>
       
       <!-- corridor -->
       <a-entity id="scene4" visible="false">
-        <a-image onclick="toIndex()" id="change-scene" look-at="#camera" position="-14.10 2.90 4" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
-        <a-image onclick="showScene3()" id="change-scene" look-at="#camera" position="19 2.90 4.3" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image onclick="toIndex()" look-at="#camera" position="-14.10 2.90 4" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image onclick="showScene3()" look-at="#camera" position="19 2.90 4.3" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
         <a-sky id="sky-04" src="#snimka_04"></a-sky>
       </a-entity>
 
@@ -107,6 +118,16 @@
         document.querySelector('#scene2').setAttribute('visible', false);
         document.querySelector('#scene3').setAttribute('visible', false);
         document.querySelector('#scene4').setAttribute('visible', true);
+      };
+
+      // Show info
+      function showInfo() {
+        document.querySelector('#info-board').emit('show-info');
+      };
+
+      // Hide info
+      function hideInfo() {
+        document.querySelector('#info-board').setAttribute('visible', false);
       };
 
     </script>
