@@ -17,7 +17,9 @@
         <img id="snimka_03" src="img/snimka_03.jpg">
         <img id="snimka_04" src="img/snimka_04.jpg">
         <img id="door-icon" src="img/open_door.png">
-        <img id="redirect" src="img/redirect.png">
+        <img id="question-icon" src="img/question-icon.png">
+        <img id="info" src="img/info.png">
+        <img id="close-x" src="img/x_button.png" alt="">
       </a-assets>
       
       <!-- CURSOR -->
@@ -35,8 +37,18 @@
                 cursor="fuse: true; maxDistance: 500; timeout: 3000;"
                 id="cursor-main"
                 position="0 0 -2"
-                geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.04;"
+                geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.03; thetaLength: 360; thetaStart: 90;"
                 material="color: #439DC2; shader: flat;"
+                raycaster="objects: .collidable"
+                >
+                <a-animation begin="cursor-fusing" easing="ease-in" attribute="geometry.thetaLength" fill="forwards" from="360" to="0"></a-animation>
+                <a-animation begin="mouseleave" attribute="geometry.thetaLength" fill="backwards" from="0" to="360" dur="0"></a-animation>
+            </a-entity>
+            <a-entity
+                id="cursor-loader"
+                position="0 0 -2.0001"
+                geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.03;"
+                material="color: #2ADD2A; shader: flat;"
                 >
             </a-entity>
         </a-entity>
@@ -44,110 +56,40 @@
   
       <!-- living room -->
       <a-entity id="scene1" visible="true">
-        <a-image onclick="showScene2()" position="6.00 2.90 -8.00" look-at="#camera" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
-          <a-event name="mouseenter" target="#redirect-text-1" opacity="1"></a-event>
-          <a-event name="mouseleave" target="#redirect-text-1" opacity="0"></a-event>
-        </a-image>
-        <a-image
-          id="redirect-text-1"
-          src="#redirect"
-          width="9.8"
-          height="0.57"
-          position="5.70 1.10 -8.24"
-          opacity="0"
-          look-at="#camera"
-        >
-        </a-image>
-        <a-image onclick="showScene4()" look-at="#camera" position="12 2.90 13" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
-          <a-event name="mouseenter" target="#redirect-text-2" opacity="1"></a-event>
-          <a-event name="mouseleave" target="#redirect-text-2" opacity="0"></a-event>
-        </a-image>
-        <a-image
-          id="redirect-text-2"
-          src="#redirect"
-          width="9.8"
-          height="0.57"
-          position="12 1.10 13"
-          opacity="0"
-          look-at="#camera"
-        >
-        </a-image>
+        <a-image class="collidable" onclick="showScene2()" position="6.00 2.90 -8.00" look-at="#camera" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image class="collidable" onclick="showScene4()" look-at="#camera" position="12 2.90 13" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image onclick="showInfo()" id="info-icon" look-at="#camera" position="-5 -1.24 5.34" src="#question-icon" scale="0.8 0.8 0.8" material="side:double;color:#FFF;shader:flat;transparent:true;src:#question-icon" geometry="primitive:plane"></a-image>
+        <a-entity id="info-board" visible="false">
+            <a-image look-at="#camera" position="-3.72 0.57 2.53" src="#info" scale="4.5 4.5 4.5" material="side:double;color:#FFF;shader:flat;transparent:true;src:#info" geometry="primitive:plane"></a-image>
+            <a-image onclick="hideInfo()" src="#close-x" position="-3.00 2.37 1.01" width="0.4" height="0.4" look-at="#camera">
+                <a-animation begin="mouseenter" attribute="material.opacity" begin="fade" to="0.8" dur="500"></a-animation>
+            </a-image>
+            <a-animation begin="show-info" easing="ease-in" attribute="visible" fill="forwards" from="false" to="true"></a-animation>
+        </a-entity>
         <a-sky id="sky-01" src="#snimka_01"></a-sky>
       </a-entity>
       
       <!-- kitchen -->
       <a-entity id="scene2" visible="false">
-        <a-image onclick="toIndex()" look-at="#camera" position="-6.10 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
-          <a-event name="mouseenter" target="#redirect-text-3" opacity="1"></a-event>
-          <a-event name="mouseleave" target="#redirect-text-3" opacity="0"></a-event>
-        </a-image>
-        <a-image
-          id="redirect-text-3"
-          src="#redirect"
-          width="9.8"
-          height="0.57"
-          position="-7.00 -2.43 17.13"
-          opacity="0"
-          look-at="#camera"
-        >
-        </a-image>
+        <a-image onclick="toIndex()" look-at="#camera" position="-6.10 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
         <a-sky id="sky-02" src="#snimka_02"></a-sky>
       </a-entity>
       
       <!-- bedroom -->
       <a-entity id="scene3" visible="false">
-        <a-image onclick="showScene4()" look-at="#camera" position="-6.70 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
-          <a-event name="mouseenter" target="#redirect-text-4" opacity="1"></a-event>
-          <a-event name="mouseleave" target="#redirect-text-4" opacity="0"></a-event>
-        </a-image>
-        <a-image
-          id="redirect-text-4"
-          src="#redirect"
-          width="9.8"
-          height="0.57"
-          position="-6.80 .43 17.13"
-          opacity="0"
-          look-at="#camera"
-        >
-        </a-image>
+        <a-image onclick="showScene4()" look-at="#camera" position="-6.70 2.90 16.38" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
         <a-sky id="sky-03" src="#snimka_03"></a-sky>
       </a-entity>
       
       <!-- corridor -->
       <a-entity id="scene4" visible="false">
-        <a-image onclick="toIndex()" look-at="#camera" position="-14.10 2.90 4" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
-          <a-event name="mouseenter" target="#redirect-text-5" opacity="1"></a-event>
-          <a-event name="mouseleave" target="#redirect-text-5" opacity="0"></a-event>
-        </a-image>
-        <a-image
-          id="redirect-text-5"
-          src="#redirect"
-          width="9.8"
-          height="0.57"
-          position="-14.10 -3.1 4"
-          opacity="0"
-          look-at="#camera"
-        >
-        </a-image>
-        <a-image onclick="showScene3()" look-at="#camera" position="19 2.90 4.3" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;">
-          <a-event name="mouseenter" target="#redirect-text-6" opacity="1"></a-event>
-          <a-event name="mouseleave" target="#redirect-text-6" opacity="0"></a-event>
-        </a-image>
-        <a-image
-          id="redirect-text-6"
-          src="#redirect"
-          width="9.8"
-          height="0.57"
-          position="19 1 4.3"
-          opacity="0"
-          look-at="#camera"
-        >
-        </a-image>
+        <a-image onclick="toIndex()" look-at="#camera" position="-14.10 2.90 4" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
+        <a-image onclick="showScene3()" look-at="#camera" position="19 2.90 4.3" src="#door-icon" scale="1.8 1.8 1.8" material="color: #fff; side: double;"></a-image>
         <a-sky id="sky-04" src="#snimka_04"></a-sky>
       </a-entity>
 
     </a-scene>
-    <script>
+    <script type="text/javascript">
       // Turn on landing page
       function toIndex() {
         document.querySelector('#scene1').setAttribute('visible', true);
@@ -177,30 +119,16 @@
         document.querySelector('#scene3').setAttribute('visible', false);
         document.querySelector('#scene4').setAttribute('visible', true);
       };
-      // Turn on scene3-(program)
-      function newSceneProgram() {
-        document.querySelector('#photosphere-menu').setAttribute('visible', false);
-        document.querySelector('#cursor-main').setAttribute('visible', true);
-        document.querySelector('#photosphere').setAttribute('visible', false);
-        document.querySelector('#scene2').setAttribute('visible', false);
-        document.querySelector('#scene3').setAttribute('visible', true);
-        document.querySelector('#landing').setAttribute('visible', false);
-      };
-      // Close menu event
-      function closeMenu() {
-        document.querySelector('#photosphere-menu').setAttribute('visible', false);
-        document.querySelector('#cursor-main').setAttribute('visible', true);
-      };
-      // document.querySelector('#github').addEventListener('click', function () {
-      //   window.location = "https://github.com/DimensionLab";
-      // });
 
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-82205701-1', 'auto');
-      ga('send', 'pageview');
+      // Show info
+      function showInfo() {
+        document.querySelector('#info-board').emit('show-info');
+      };
+
+      // Hide info
+      function hideInfo() {
+        document.querySelector('#info-board').setAttribute('visible', false);
+      };
 
     </script>
   </body>
