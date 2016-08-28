@@ -1,7 +1,7 @@
 {
-  "name": "aframe-hello-world-boilerplate",
-  "description": "Boilerplate with A-Frame's 'Hello, World!' of WebVR.",
-  "version": "0.3.0",
+  "name": "dimensionlab-paseo-grunty-360",
+  "description": "Paseo Grunty 360 webVR Experience made with A-Frame.",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "start": "budo --live --verbose --port 3000 --open",
@@ -13,6 +13,9 @@
     "ghpages": "0.0.3"
   },
   "keywords": [
+    "dimensionlab",
+    "paseo",
+    "vizualizacky.sk",
     "aframe",
     "aframe-example",
     "aframe-boilerplate",
