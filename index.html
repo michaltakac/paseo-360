@@ -17,6 +17,8 @@
         <img id="snimka_03" src="img/snimka_03.jpg">
         <img id="snimka_04" src="img/snimka_04.jpg">
         <img id="door-icon" src="img/open_door.png">
+        <img id="arrow-icon" src="img/arrow.png">
+        <img id="transparent" src="img/transparent.png">
         <img id="question-icon" src="img/question-icon.png">
         <img id="info" src="img/info.png">
         <img id="close-x" src="img/x_button.png" alt="">
@@ -65,6 +67,32 @@
                 <a-animation begin="mouseenter" attribute="material.opacity" begin="fade" to="0.8" dur="500"></a-animation>
             </a-image>
             <a-animation begin="show-info" easing="ease-in" attribute="visible" fill="forwards" from="false" to="true"></a-animation>
+        </a-entity>
+        <!-- Circle on flat -->
+        <a-entity
+            id="scene2-teleport"
+            position="8.21 -4.64 -13.81"
+            rotation="-90 0 0"
+            geometry="primitive: ring; radiusOuter: 1; radiusInner: 0.80;"
+            material="color: #A5EBDA; shader: flat;"
+            >
+        </a-entity>
+        <a-entity
+          position="3.71 -4.64 -2.96"
+          rotation="-90 66.50 0"
+          geometry="primitive: plane;"
+          src="#arrow-icon"
+          scale="1.8 1.8 1.8"
+          material="side:double;color:#FFF;shader:flat;transparent:true;src:#arrow-icon"
+        >
+        </a-entity>
+        <a-entity
+          position="3.71 -4.64 -2.96"
+          geometry="primitive: plane;width: 15px; height: 15px;"
+          look-at="#camera"
+          scale="1.8 1.8 1.8"
+          material="side:front;transparent:true;src:#transparent;"
+        >
         </a-entity>
         <a-sky id="sky-01" src="#snimka_01"></a-sky>
       </a-entity>
@@ -132,6 +160,13 @@
       function hideInfo() {
         document.querySelector('#info-board').setAttribute('visible', false);
       };
+
+      document.addEventListener('keydown', function(event) {
+        if (event.which === 87) {
+          showScene2()
+        }
+        console.log(event.which);
+      });
 
     </script>
   </body>
