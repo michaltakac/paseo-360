@@ -2,15 +2,15 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Paseo Grunty 360 webVR Experience</title>
-    <meta name="description" content="Paseo Grunty 360 webVR Experience">
-    <script src="js/aframe-0.3.0.min.js"></script>
+    <title>Paseo Grunty 360 WebVR Experience</title>
+    <meta name="description" content="Paseo Grunty 360 WebVR Experience">
+    <script src="js/aframe-0.3.2.min.js"></script>
     <script src="js/aframe-extras.min.js"></script>
     <script src="js/aframe-look-at-component.min.js"></script>
     <script src="js/aframe-bmfont-text-component.min.js"></script>
   </head>
   <body>
-    <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+    <a-scene>
       <a-assets>
         <img id="snimka_01" src="img/snimka_01.jpg">
         <img id="snimka_02" src="img/snimka_02.jpg">
@@ -39,7 +39,7 @@
                 cursor="fuse: true; maxDistance: 500; timeout: 3000;"
                 id="cursor-main"
                 position="0 0 -2"
-                geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.03; thetaLength: 360; thetaStart: 90;"
+                geometry="primitive: ring; radiusOuter: 0.03; radiusInner: 0.02; thetaLength: 360; thetaStart: 90;"
                 material="color: #439DC2; shader: flat;"
                 raycaster="objects: .collidable"
                 >
@@ -49,7 +49,7 @@
             <a-entity
                 id="cursor-loader"
                 position="0 0 -2.0001"
-                geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.03;"
+                geometry="primitive: ring; radiusOuter: 0.03; radiusInner: 0.02;"
                 material="color: #2ADD2A; shader: flat;"
                 >
             </a-entity>

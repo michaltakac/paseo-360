@@ -1,7 +1,7 @@
 {
   "name": "dimensionlab-paseo-grunty-360",
   "description": "Paseo Grunty 360 webVR Experience made with A-Frame.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "scripts": {
     "start": "budo --live --verbose --port 3000 --open",
